@@ -92,7 +92,7 @@ Examples
         with:
           version-name: '1.0.0-alpha.01'
           version-code:  1
-          update-type: 'build'
+          update-type: 'release'
       - name: 'Get Builded version'
         run: |
           echo "update"
