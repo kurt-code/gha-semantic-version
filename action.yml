@@ -33,5 +33,5 @@ outputs:
     description: "the new version code"
     value: ${{ steps.new-version-generator.outputs.new-version-code }}
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'dist/index.js'

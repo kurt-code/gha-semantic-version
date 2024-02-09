@@ -20,7 +20,10 @@ function resetFile() {
 }
 
 describe('version updates without properties file', () => {
-  const version = new SemanticVersion('myapp.version.name', 'myapp.version.code')
+  const version = new SemanticVersion(
+    'myapp.version.name',
+    'myapp.version.code'
+  )
 
   it('can bump to a PATCH version', () => {
     const version = new SemanticVersion()
@@ -134,7 +137,10 @@ describe('version updates without properties file', () => {
 })
 
 describe('version updates with properties file', () => {
-  const version = new SemanticVersion('myapp.version.name', 'myapp.version.code')
+  const version = new SemanticVersion(
+    'myapp.version.name',
+    'myapp.version.code'
+  )
 
   beforeEach(() => {
     resetFile()
