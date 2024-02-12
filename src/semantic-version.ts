@@ -21,7 +21,9 @@ export class SemanticVersion {
     version_code?: number,
     filePath?: string
   ): VersionInfo {
-    let old_name: string = version_name ? version_name : ''
+    let old_name: string = version_name ? version_name : '0.0.1'
+    const parsed_version = Version.parse(old_name)
+    old_name = `${parsed_version.major}.${parsed_version.minor}.${parsed_version.patch}`
     let old_code: number = isNaN(version_code ?? NaN)
       ? -1
       : (version_code as number)
@@ -43,10 +45,10 @@ export class SemanticVersion {
       old_code = parseInt(code)
       old_name = name
     } else {
-      core.debug('old_name  ${old_name}')
-      core.debug('old_code  ${old_code}')
+      core.debug(`old_name  ${old_name}`)
+      core.debug(`old_code  ${old_code}`)
       core.debug(
-        'update()  type:${updateType} name:${version_name}  code:${version_code}  file:${filePath}'
+        `update()  type:${updateType} name:${version_name}  code:${version_code}  file:${filePath}`
       )
       //else  read version and version code
       if (isNaN(old_code)) {
@@ -107,6 +109,7 @@ export class SemanticVersion {
         old_version.major,
         old_version.minor,
         old_version.patch,
+        undefined,
         undefined
       )
     } else {

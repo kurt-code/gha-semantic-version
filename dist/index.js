@@ -330,7 +330,9 @@ class SemanticVersion {
         this.version_name_key = version_name_key !== null && version_name_key !== void 0 ? version_name_key : 'version_name';
     }
     update(updateType, version_name, version_name_postfix, version_code, filePath) {
-        let old_name = version_name ? version_name : '';
+        let old_name = version_name ? version_name : '0.0.1';
+        const parsed_version = version_1.Version.parse(old_name);
+        old_name = `${parsed_version.major}.${parsed_version.minor}.${parsed_version.patch}`;
         let old_code = isNaN(version_code !== null && version_code !== void 0 ? version_code : NaN)
             ? -1
             : version_code;
@@ -350,9 +352,9 @@ class SemanticVersion {
             old_name = name;
         }
         else {
-            core.debug('old_name  ${old_name}');
-            core.debug('old_code  ${old_code}');
-            core.debug('update()  type:${updateType} name:${version_name}  code:${version_code}  file:${filePath}');
+            core.debug(`old_name  ${old_name}`);
+            core.debug(`old_code  ${old_code}`);
+            core.debug(`update()  type:${updateType} name:${version_name}  code:${version_code}  file:${filePath}`);
             //else  read version and version code
             if (isNaN(old_code)) {
                 throw new Error('invalid version code');
@@ -392,7 +394,7 @@ class SemanticVersion {
             new_version = old_version.copy(old_version.major, old_version.minor, old_version.patch, preRelease);
         }
         else if (update_type === version_type_1.VersionType.release) {
-            new_version = old_version.copy(old_version.major, old_version.minor, old_version.patch, undefined);
+            new_version = old_version.copy(old_version.major, old_version.minor, old_version.patch, undefined, undefined);
         }
         else {
             throw new Error('invalid update type');

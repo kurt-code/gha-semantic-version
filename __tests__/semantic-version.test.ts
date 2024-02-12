@@ -42,7 +42,7 @@ describe('version updates without properties file', () => {
     const version = new SemanticVersion()
     const new_version = version.update(
       VersionType.patch,
-      '1.0.0',
+      '1.0.0-beta.1',
       'beta',
       1,
       undefined
@@ -66,7 +66,7 @@ describe('version updates without properties file', () => {
   it('can bump a pre-release to a MINOR version', () => {
     const new_version = version.update(
       VersionType.minor,
-      '1.0.0',
+      '1.0.0-beta.1',
       'beta',
       1,
       undefined
@@ -90,7 +90,7 @@ describe('version updates without properties file', () => {
   it('can bump a pre-release to a MAJOR version', async () => {
     const new_version = version.update(
       VersionType.major,
-      '1.1.0',
+      '1.1.0-alpha.1',
       'alpha',
       1,
       undefined
@@ -102,7 +102,7 @@ describe('version updates without properties file', () => {
   it('can bump a PRE-RELEASE version', async () => {
     const new_version = version.update(
       VersionType.pre_release,
-      '1.0.0',
+      '1.0.0-beta.400',
       'beta',
       400,
       undefined
@@ -114,7 +114,7 @@ describe('version updates without properties file', () => {
   it('can bump to a RELEASE version', async () => {
     const new_version = version.update(
       VersionType.release,
-      '1.0.0',
+      '1.0.0-beta.400',
       undefined,
       400,
       undefined
@@ -126,7 +126,7 @@ describe('version updates without properties file', () => {
   it('can bump a pre-release to a RELEASE version', async () => {
     const new_version = version.update(
       VersionType.release,
-      '1.0.0',
+      '1.0.0-beta.400',
       'beta',
       400,
       undefined
