@@ -105,7 +105,7 @@ export class SemanticVersion {
         preRelease
       )
     } else if (update_type === VersionType.release) {
-      new_version = old_version.copy(
+      new_version = Version.create(
         old_version.major,
         old_version.minor,
         old_version.patch,

@@ -9,13 +9,13 @@ const file_path = path.join(__dirname, '.', 'version.properties')
 const pre_file_path = path.join(__dirname, '.', 'version-pre.properties')
 function resetFile() {
   const properties = new Properties(file_path)
-  properties.setValue('myapp.version.name', '1.0.0')
-  properties.setValue('myapp.version.code', '1')
+  properties.setValue('myapp.version.name', '4.0.0')
+  properties.setValue('myapp.version.code', '4')
   properties.saveToFile()
 
   const properties2 = new Properties(pre_file_path)
-  properties2.setValue('myapp.version.name', '1.0.0-beta.1')
-  properties2.setValue('myapp.version.code', '1')
+  properties2.setValue('myapp.version.name', '4.0.0-beta.4')
+  properties2.setValue('myapp.version.code', '4')
   properties2.saveToFile()
 }
 
@@ -29,109 +29,109 @@ describe('version updates without properties file', () => {
     const version = new SemanticVersion()
     const new_version = version.update(
       VersionType.patch,
-      '1.0.0',
+      '4.0.0',
       undefined,
-      1,
+      4,
       undefined
     )
-    expect(new_version.version_name).toEqual('1.0.1')
-    expect(new_version.version_code).toEqual(2)
+    expect(new_version.version_name).toEqual('4.0.1')
+    expect(new_version.version_code).toEqual(5)
   })
 
   it('can bump a pre-release to a PATCH version', () => {
     const version = new SemanticVersion()
     const new_version = version.update(
       VersionType.patch,
-      '1.0.0-beta.1',
+      '4.0.0-beta.4',
       'beta',
-      1,
+      4,
       undefined
     )
-    expect(new_version.version_name).toEqual('1.0.1')
-    expect(new_version.version_code).toEqual(2)
+    expect(new_version.version_name).toEqual('4.0.1')
+    expect(new_version.version_code).toEqual(5)
   })
 
   it('can bump to a MINOR version', () => {
     const new_version = version.update(
       VersionType.minor,
-      '1.0.0',
+      '4.0.0',
       undefined,
-      1,
+      4,
       undefined
     )
-    expect(new_version.version_name).toEqual('1.1.0')
-    expect(new_version.version_code).toEqual(2)
+    expect(new_version.version_name).toEqual('4.1.0')
+    expect(new_version.version_code).toEqual(5)
   })
 
   it('can bump a pre-release to a MINOR version', () => {
     const new_version = version.update(
       VersionType.minor,
-      '1.0.0-beta.1',
+      '4.0.0-beta.4',
       'beta',
-      1,
+      4,
       undefined
     )
-    expect(new_version.version_name).toEqual('1.1.0')
-    expect(new_version.version_code).toEqual(2)
+    expect(new_version.version_name).toEqual('4.1.0')
+    expect(new_version.version_code).toEqual(5)
   })
 
   it('can bump to a MAJOR version', async () => {
     const new_version = version.update(
       VersionType.major,
-      '1.1.0',
+      '4.1.0',
       undefined,
-      1,
+      4,
       undefined
     )
-    expect(new_version.version_name).toEqual('2.0.0')
-    expect(new_version.version_code).toEqual(2)
+    expect(new_version.version_name).toEqual('5.0.0')
+    expect(new_version.version_code).toEqual(5)
   })
 
   it('can bump a pre-release to a MAJOR version', async () => {
     const new_version = version.update(
       VersionType.major,
-      '1.1.0-alpha.1',
+      '4.1.0-alpha.3',
       'alpha',
-      1,
+      3,
       undefined
     )
-    expect(new_version.version_name).toEqual('2.0.0')
-    expect(new_version.version_code).toEqual(2)
+    expect(new_version.version_name).toEqual('5.0.0')
+    expect(new_version.version_code).toEqual(4)
   })
 
   it('can bump a PRE-RELEASE version', async () => {
     const new_version = version.update(
       VersionType.pre_release,
-      '1.0.0-beta.400',
+      '4.0.0-beta.400',
       'beta',
       400,
       undefined
     )
-    expect(new_version.version_name).toEqual('1.0.0-beta.401')
+    expect(new_version.version_name).toEqual('4.0.0-beta.401')
     expect(new_version.version_code).toEqual(401)
   })
 
   it('can bump to a RELEASE version', async () => {
     const new_version = version.update(
       VersionType.release,
-      '1.0.0-beta.400',
-      undefined,
+      '4.0.0-beta.400',
+      'dev',
       400,
       undefined
     )
-    expect(new_version.version_name).toEqual('1.0.0')
+    expect(new_version.version_name).toEqual('4.0.0')
     expect(new_version.version_code).toEqual(401)
   })
 
   it('can bump a pre-release to a RELEASE version', async () => {
     const new_version = version.update(
       VersionType.release,
-      '1.0.0-beta.400',
+      '4.0.0-beta.400',
       'beta',
       400,
       undefined
     )
-    expect(new_version.version_name).toEqual('1.0.0')
+    expect(new_version.version_name).toEqual('4.0.0')
     expect(new_version.version_code).toEqual(401)
   })
 })
@@ -158,8 +158,8 @@ describe('version updates with properties file', () => {
       undefined,
       file_path
     )
-    expect(new_version.version_name).toEqual('1.0.1')
-    expect(new_version.version_code).toEqual(2)
+    expect(new_version.version_name).toEqual('4.0.1')
+    expect(new_version.version_code).toEqual(5)
   })
 
   it('can bump a pre-release to a PATCH version', () => {
@@ -170,8 +170,8 @@ describe('version updates with properties file', () => {
       undefined,
       pre_file_path
     )
-    expect(new_version.version_name).toEqual('1.0.1')
-    expect(new_version.version_code).toEqual(2)
+    expect(new_version.version_name).toEqual('4.0.1')
+    expect(new_version.version_code).toEqual(5)
   })
 
   it('can bump to a MINOR version', () => {
@@ -182,8 +182,8 @@ describe('version updates with properties file', () => {
       undefined,
       file_path
     )
-    expect(new_version.version_name).toEqual('1.1.0')
-    expect(new_version.version_code).toEqual(2)
+    expect(new_version.version_name).toEqual('4.1.0')
+    expect(new_version.version_code).toEqual(5)
   })
 
   it('can bump a pre-release to a MINOR version', () => {
@@ -194,8 +194,8 @@ describe('version updates with properties file', () => {
       undefined,
       pre_file_path
     )
-    expect(new_version.version_name).toEqual('1.1.0')
-    expect(new_version.version_code).toEqual(2)
+    expect(new_version.version_name).toEqual('4.1.0')
+    expect(new_version.version_code).toEqual(5)
   })
 
   it('can bump to a MAJOR version', async () => {
@@ -206,8 +206,8 @@ describe('version updates with properties file', () => {
       undefined,
       file_path
     )
-    expect(new_version.version_name).toEqual('2.0.0')
-    expect(new_version.version_code).toEqual(2)
+    expect(new_version.version_name).toEqual('5.0.0')
+    expect(new_version.version_code).toEqual(5)
   })
 
   it('can bump a pre-release to a MAJOR version', async () => {
@@ -216,10 +216,10 @@ describe('version updates with properties file', () => {
       undefined,
       undefined,
       undefined,
-      file_path
+      pre_file_path
     )
-    expect(new_version.version_name).toEqual('2.0.0')
-    expect(new_version.version_code).toEqual(2)
+    expect(new_version.version_name).toEqual('5.0.0')
+    expect(new_version.version_code).toEqual(5)
   })
 
   it('can bump a PRE-RELEASE version', async () => {
@@ -230,8 +230,8 @@ describe('version updates with properties file', () => {
       undefined,
       file_path
     )
-    expect(new_version.version_name).toEqual('1.0.0-beta.2')
-    expect(new_version.version_code).toEqual(2)
+    expect(new_version.version_name).toEqual('4.0.0-beta.5')
+    expect(new_version.version_code).toEqual(5)
   })
 
   it('can bump to a RELEASE version', async () => {
@@ -242,19 +242,19 @@ describe('version updates with properties file', () => {
       undefined,
       file_path
     )
-    expect(new_version.version_name).toEqual('1.0.0')
-    expect(new_version.version_code).toEqual(2)
+    expect(new_version.version_name).toEqual('4.0.0')
+    expect(new_version.version_code).toEqual(5)
   })
 
   it('can bump a pre-release to a RELEASE version', async () => {
     const new_version = version.update(
       VersionType.release,
       undefined,
-      'beta',
       undefined,
-      file_path
+      undefined,
+      pre_file_path
     )
-    expect(new_version.version_name).toEqual('1.0.0')
-    expect(new_version.version_code).toEqual(2)
+    expect(new_version.version_name).toEqual('4.0.0')
+    expect(new_version.version_code).toEqual(5)
   })
 })

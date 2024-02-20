@@ -394,7 +394,7 @@ class SemanticVersion {
             new_version = old_version.copy(old_version.major, old_version.minor, old_version.patch, preRelease);
         }
         else if (update_type === version_type_1.VersionType.release) {
-            new_version = old_version.copy(old_version.major, old_version.minor, old_version.patch, undefined, undefined);
+            new_version = version_1.Version.create(old_version.major, old_version.minor, old_version.patch, undefined, undefined);
         }
         else {
             throw new Error('invalid update type');
